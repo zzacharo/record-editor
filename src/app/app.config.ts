@@ -1,4 +1,5 @@
 import { OpaqueToken } from '@angular/core';
+import { BASE_URL } from '../environments/environment';
 
 export let APP_CONFIG = new OpaqueToken('app.config');
 
@@ -53,19 +54,19 @@ export const INSPIRE_EDITOR_CONFIG: AppConfig = {
       "x_editor_priority": 1
     },
     "hidden_notes.items.properties.value": {
-		  "x_editor_priority": 1
+      "x_editor_priority": 1
     },
     "isbns.items.properties.value": {
-		  "x_editor_priority": 1
+      "x_editor_priority": 1
     },
     "keywords.items.properties.keyword": {
-		  "x_editor_priority": 1
+      "x_editor_priority": 1
     },
     "persistent_identifiers.items.properties.value": {
-		  "x_editor_priority": 1
+      "x_editor_priority": 1
     },
     "public_notes.items.properties.value": {
-	  	"x_editor_priority": 1
+      "x_editor_priority": 1
     },
     "publication_info.items.properties.conference_record": {
       "x_editor_hidden": true
@@ -109,5 +110,9 @@ export const INSPIRE_EDITOR_CONFIG: AppConfig = {
     "urls.items.properties.value": {
       "x_editor_priority": 1
     }
-}
+  },
+  base_url : BASE_URL.base_url,
+  api_url : function(pid_type: string , pid_value: string): string {
+    return `${this.base_url}/api/${pid_type}/${pid_value}/db`;
+  }
 };

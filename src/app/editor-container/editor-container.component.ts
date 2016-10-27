@@ -18,7 +18,7 @@
  * In applying this license, CERN does not
  * waive the privileges and immunities granted to it by virtue of its status
  * as an Intergovernmental Organization or submit itself to any jurisdiction.
-*/
+ */
 
 import { Component, Inject, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
@@ -30,17 +30,21 @@ import { APP_CONFIG } from '../app.config';
 
 @Component({
   selector: 're-editor-container',
-  templateUrl: './editor-container.component.html'
+  templateUrl: './editor-container.component.html',
+  styleUrls: [
+    './editor-container.component.scss'
+  ]
 })
+
 export class EditorContainerComponent implements OnInit {
   private config: Object = {};
   private record: Object;
   private schema: Object;
-
+  
   constructor(private route: ActivatedRoute, private recordService: RecordService, @Inject(APP_CONFIG) config: AppConfig) {
     this.config = config;
   }
-
+  
   ngOnInit() {
     this.route.queryParams.subscribe(params => {
       let record;
@@ -49,13 +53,13 @@ export class EditorContainerComponent implements OnInit {
           record = fetched;
           return this.recordService.fetchSchema(record['$schema']);
         }).subscribe(schema => {
-          this.record = record;
-          this.schema = schema;
-        }, error => console.error(error));
-    });
-    }
-
-  onRecordChange(record: Object) {
         this.record = record;
-      }
+        this.schema = schema;
+      }, error => console.error(error));
+    });
+  }
+  
+  onRecordChange(record: Object) {
+    this.record = record;
+  }
 }
